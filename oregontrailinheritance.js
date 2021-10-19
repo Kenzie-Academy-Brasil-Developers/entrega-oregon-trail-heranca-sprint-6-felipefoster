@@ -3,12 +3,11 @@ let Quarantine = false;
 class Traveler {
     constructor(name, food = 1, _isHealthy = true) { //constructor(name, food)
         this.name = name;
-        this.food = food = 1
-        this._isHealthy = _isHealthy = true
+        this.food = food
+        this._isHealthy = _isHealthy
     }
 
    hunt() {
-
        return this.food += 2
    }
 
@@ -22,14 +21,13 @@ class Traveler {
         this._isHealthy = false
         return 'Não está saudavel'
     }
-
    }
 }
 
 class Hunter extends Traveler {
-    constructor(name, food, _isHealthy = true){
-        super(name, _isHealthy)
-        this.food = food = 2
+    constructor(name){
+        super(name)
+        this.food = 2
     }
     
     hunt(){
@@ -50,59 +48,43 @@ class Hunter extends Traveler {
             this._isHealthy = false
             return 'Não está saudavel'
         }
-            
-            
-            
     }
     
     giveFood(traveler, numOfFoodUnits){
-        
         if(numOfFoodUnits < this.food){
             this.food -= numOfFoodUnits
             traveler.food += numOfFoodUnits
-
         } else {
            return "Food insuficiente."
         }
-
     }
-
-    
 }
 
-
 class Doctor extends Traveler {
-    constructor(name, food = 1, _isHealthy = true) { //constructor(name, food)
-        super(name, food)
-        this.food = food = 1
+    constructor(name) { //constructor(name, food)
+        super(name)
     }
 
    hunt() {
-
        return this.food += 2
    }
 
     eat() {
-    if (this.food > 0){
-        this.food -= 1
-        this._isHealthy = true
-        Quarantine = false;
-        return ('Comeu e está bem.')
-    } else if (this.food < 1) {
-        this._isHealthy = false
-        return 'Não está saudavel'
-    }
-        
-        
-        
+        if (this.food > 0){
+            this.food -= 1
+            this._isHealthy = true
+            Quarantine = false;
+            return ('Comeu e está bem.')
+        } else if (this.food < 1) {
+            this._isHealthy = false
+            return 'Não está saudavel'
+        }
     }
     
-
     heal(traveler) {
         traveler._isHealthy = true
         Quarantine = false
     }
-
 }
 
 
@@ -115,14 +97,11 @@ class Wagon extends Traveler {
 
     getAvailableSeatCount() {      
         //Retorna o número de assentos vazios, determinado pela capacidade que foi estipulada quando a carroça foi criada comparado com o número de passageiros a bordo no momento.
-
-        
         if (this.passageiros.length < this.capacity){
-           return this.capacity - this.passageiros.length 
+            return this.capacity - this.passageiros.length 
         } else if (this.passageiros.length >= this.capacity){
             return 0
         }
-
     }
     
 
@@ -134,7 +113,6 @@ class Wagon extends Traveler {
         } else {
             return 'Está cheio'
         }
-
     }
 
     
@@ -143,12 +121,11 @@ class Wagon extends Traveler {
         for (let i = 0; i < this.passageiros.length; i++) {
             if (this.passageiros[i]._isHealthy === true){
                 Quarantine = false
-                } else {
-                    Quarantine = true
-                    break
+            } else {
+                Quarantine = true
+                break;
                 }
         }
-        
         return Quarantine
     }
 
@@ -159,7 +136,6 @@ class Wagon extends Traveler {
         for (let i = 0; i < this.passageiros.length; i++) {
             foodTotal += this.passageiros[i].food
         }
-        
         return foodTotal
     }
 
